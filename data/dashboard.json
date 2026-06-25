@@ -1,0 +1,128 @@
+{
+  "meta": {
+    "lastUpdated": "25 Jun 2026",
+    "version": 2,
+    "betaAccounts": 9,
+    "emergentUseCases": 7,
+    "failureModes": 3,
+    "capabilityGaps": 6
+  },
+  "reliableCore": [
+    "Event & shift creation and configuration",
+    "Bulk shift duplication with settings preserved",
+    "Event copying and renaming",
+    "Shift time, demand & description updates",
+    "Volunteer search and profile lookup",
+    "Venue search and address resolution"
+  ],
+  "useCases": [
+    { "name": "Initialize new appointments", "description": "Establish scheduling entries", "conversations": 2, "visitors": 6, "accounts": 4, "unsupportedRate": 0, "rageRate": 0, "retention": 0, "signal": "supported", "signalLabel": "Supported ✓" },
+    { "name": "Configure visibility settings", "description": "Access permissions & publication status", "conversations": 2, "visitors": 5, "accounts": 4, "unsupportedRate": 50, "rageRate": 0, "retention": 0, "signal": "partial", "signalLabel": "Partial gap" },
+    { "name": "Resolve scheduling config issues", "description": "Linked availability & creation status", "conversations": 2, "visitors": 4, "accounts": 4, "unsupportedRate": 50, "rageRate": 50, "retention": 0, "signal": "friction", "signalLabel": "Friction signal" },
+    { "name": "Allocate volunteer resources", "description": "Assign personnel to time slots", "conversations": 2, "visitors": 4, "accounts": 4, "unsupportedRate": 50, "rageRate": 100, "retention": 25, "signal": "high-friction", "signalLabel": "High friction" },
+    { "name": "Automate recurring scheduling", "description": "Repeating time slots / series", "conversations": 2, "visitors": 3, "accounts": 3, "unsupportedRate": 100, "rageRate": 0, "retention": 0, "signal": "gap", "signalLabel": "Full gap — future build" },
+    { "name": "Manage bulk schedules", "description": "Batch creation & modification", "conversations": 1, "visitors": 2, "accounts": 1, "unsupportedRate": 100, "rageRate": 0, "retention": 0, "signal": "gap", "signalLabel": "Full gap — future build" },
+    { "name": "Duplicate rename operations", "description": "Bulk copy & title updates", "conversations": 1, "visitors": 1, "accounts": 1, "unsupportedRate": 100, "rageRate": 0, "retention": 100, "signal": "low", "signalLabel": "Low volume" }
+  ],
+  "issues": [
+    {
+      "title": "Shift creation hanging / silent execution failure",
+      "description": "Pip says 'creating now' repeatedly without executing tool calls",
+      "accounts": ["Guide Dogs NSW/ACT"],
+      "rootCause": "Execution reliability bug — not a scope gap",
+      "evidence": "3 rage prompts · 84s processing delay · User stated 'I think this is bugged'",
+      "status": "jira",
+      "statusLabel": "Jira raised · BTD · Sprint 115",
+      "action": "Interstellar team investigating",
+      "priority": "critical"
+    },
+    {
+      "title": "Volunteer assignment fails at end of workflow",
+      "description": "Pip completes shift creation and volunteer search, then fails at assignment step",
+      "accounts": ["Families Forward", "The Light House"],
+      "rootCause": "Assignment API not exposed to Pip — trust-breaking UX pattern",
+      "evidence": "Pip finds volunteers, cannot assign · Happened twice per session",
+      "status": "decision",
+      "statusLabel": "API decision needed",
+      "action": "Expose assignment API or scope Pip out upfront",
+      "priority": "high"
+    },
+    {
+      "title": "Linked shift handling failure",
+      "description": "Cannot confirm linked shift updates via API",
+      "accounts": ["Guide Dogs NSW/ACT"],
+      "rootCause": "Linked shift confirmation param not exposed to Pip",
+      "evidence": "9 tool call attempts · Task incomplete · User redirected to dashboard",
+      "status": "api-gap",
+      "statusLabel": "API gap",
+      "action": "Expose linked shift confirmation param",
+      "priority": "high"
+    },
+    {
+      "title": "Unauthorized volunteer management",
+      "description": "System denies portal access, volunteer addition, check-in",
+      "accounts": ["Families Forward", "Pont3 Volunteers"],
+      "rootCause": "Intentional scope boundary — volunteer portal is out of scope",
+      "evidence": "Pip correctly declined but users expected it to work",
+      "status": "scope",
+      "statusLabel": "Communicate scope",
+      "action": "Improve onboarding and capability framing",
+      "priority": "medium"
+    },
+    {
+      "title": "Unsupported configuration requests",
+      "description": "Email notifications & event templates outside current scope",
+      "accounts": ["HYROX UK", "Xavier Social Justice Network"],
+      "rootCause": "Capability gap — not in current scope",
+      "evidence": "Pip correctly declined · Users redirected externally",
+      "status": "backlog",
+      "statusLabel": "Future roadmap",
+      "action": "Validate demand, add to backlog",
+      "priority": "low"
+    }
+  ],
+  "capabilityGaps": [
+    { "name": "Volunteer assignment to shifts", "description": "API not exposed — trust-breaking failure pattern", "type": "api", "typeLabel": "API gap", "accounts": ["The Light House", "Families Forward"], "unsupportedRate": 100, "action": "Expose bulk assign API or scope out clearly upfront", "priority": "high" },
+    { "name": "Linked shift handling", "description": "Confirmation param missing", "type": "api", "typeLabel": "API gap", "accounts": ["Guide Dogs NSW/ACT"], "unsupportedRate": 100, "action": "Expose linked shift confirmation param", "priority": "high" },
+    { "name": "Volunteer check-in", "description": "Check-in tool not exposed to Pip", "type": "api", "typeLabel": "API gap", "accounts": ["Families Forward"], "unsupportedRate": 100, "action": "Expose check-in tool to Pip", "priority": "high" },
+    { "name": "Recurring / series shift creation", "description": "No native series support in Pip", "type": "capability", "typeLabel": "Capability gap", "accounts": ["Guide Dogs NSW/ACT", "The Light House"], "unsupportedRate": 100, "action": "New capability — future sprint", "priority": "medium" },
+    { "name": "Shift group visibility configuration", "description": "Granular group-level visibility not exposed", "type": "capability", "typeLabel": "Capability gap", "accounts": ["Pont3 Volunteers"], "unsupportedRate": 50, "action": "New capability — future sprint", "priority": "medium" },
+    { "name": "Event templates & email notifications", "description": "Outside current scope", "type": "capability", "typeLabel": "Capability gap", "accounts": ["HYROX UK", "Xavier Social Justice Network"], "unsupportedRate": 100, "action": "Backlog — validate demand further", "priority": "low" }
+  ],
+  "customerFeedback": [
+    {
+      "org": "Breast Cancer Now",
+      "contact": "Kylie Jennings",
+      "status": "active",
+      "statusLabel": "Active beta",
+      "themes": ["Lite admin access", "Role-based Pip permissions", "Template scripts (format TBC)"],
+      "openItems": ["Lite admin count at BCN", "What 'template script' means (CSV vs saved prompts vs workflow)", "Whether 'lite admin' is a formal Rosterfy tier"],
+      "notes": "3 open clarifications pending follow-up"
+    },
+    {
+      "org": "Crisis UK",
+      "contact": "Liv, Alex",
+      "status": "pending",
+      "statusLabel": "Trust review pending",
+      "themes": ["AI auditability", "Action attribution", "Responsible AI governance", "UK GDPR compliance"],
+      "openItems": ["Trust documentation review in progress", "Anthropic subprocessor detail needed on trust.rosterfy.com"],
+      "notes": "Blocking beta activation"
+    }
+  ],
+  "roadmapGaps": {
+    "immediate": [
+      "Shift creation execution reliability bug",
+      "Volunteer assignment API exposure (or clear scope communication)",
+      "Linked shift confirmation API param"
+    ],
+    "nearTerm": [
+      "Volunteer check-in tool exposure",
+      "Recurring / series shift creation",
+      "Shift group visibility configuration",
+      "AI audit logging & action attribution",
+      "Trust Centre — Anthropic subprocessor detail",
+      "Responsible AI governance framework",
+      "Regional data processing controls"
+    ]
+  }
+}
