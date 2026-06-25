@@ -11,7 +11,9 @@ interface ChatMessage {
   thinking?: boolean
 }
 
-const PIP_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAFKElEQVR4AX1VW3MURRT+Ts/sNaGyuW0uELKRi8UlCaCAXCyilJalZcGLz+ovgH+Q5A9Y/AN49U18UalCiZQGTWkwQAwIZK0kEAhhk8pudmd2Z46nu3eTcIldOzvT3ae/851rE/5nMHOqtIpzz56WB2YeFDORmMrodTdCS4mkc3NbV/SyE1ffJBKU3QyDXrdYLHKmsBJcnBgrDEzfDVDMM2LRmEgTW8UhyuUKxeuYd/e61NYZu9TaGR1ubHxV0SsK/BKfG/15ZWhyvNLgUIyUUlyT038hsz1IJHPiSlChaDzg3f1qeX9/crih0bmwqQKvyIM/XlkZmp5ScF1XPMQaRygbxOqHOSYfrFVodfLHCMMQ3bsCnBjYMtTQSMM1TLf2URLmV3/ID2XvuSBXISRQlavFNu7RXywu0sTMutVKSn4K2fuyovJDucVgubHZWkI1n//1R3F8bBQpJ+JyQwNTqkkOPAxBVdoWFBavGova0JqtACEIQ97XFywfPFx3UMdEaYG5ufLgrVucgusglHlnj4vuNx0cP+2iY7uiUCMq4lBrUwIigBsfcRaHsq4fEozJSaRKxeCixlaa/fw8f1H0owYgEN9y1dtulLBzn4OjpxyktypKbhEQUiJHsArt24laJXK2qjyCO5PlgVyOU8r3w7O3J+0Gq+rhl3IrniDs6VXY2+8YApqItsoSAh057iCxBdpSY4V+37uv4x+eV3OPwjOFkrNmut6c/LuEfCGwEdrwOBEDiNY2QqJeu0txc1ohWU+yZ4HZWKV41XNpMReecku+OsBKSkfHTpmMI68S46s/edTSHGLnjijSbdFaMGHj4OPEuwlwaANfDsjEzriNq3Qkq2YfVTJuEFIqNDlgskMnocmuSDyOZang0TEfyWQeb3Q7aGmJGpYz8xEu3ijQ/r0J1Nc7Rnl3xsHqXaZiaT23EslIxpRpAM1AXCQ69Nv4Uq/L2xVFXpDk2/84uDJSFJYOQzm0sJTA9Rs+SwkYSuk04chhha4u42qDqQvFLXqU9SqcMTXDvF6rkhUtjUzPcmBbA6742YVXtikg/mSvHNH4mJ7xMHXPQ7rVQVMqIjIOdIuRsC67ne3I+hXqllq3OqoF3NVOOHmYsFIA3RgnXnyu922LgCUjARNXi4f+nGCxsp5zBaZAmpXjSGVXmOJxdVM1NWAkHgslsNKLygS/DPKF5cx8xWhKJoD3j4Pe6lNoaZIEKJMwF0CR9wOFr79dxUopCmmuJESFp2PO19Up3taBy6SL4epvnBsZW2tqbNjJ7O19HvXuib9QE54H3P8X+H0iNK3BJodaO2ObIPDxKYUDfehR0i+WjvbTNXI0M2h2wkTYVUBjtxzcmfKs4uoTk4zd1h7A80XeyJGJi7ZKn9Hz+jrC9q241CG9yARMrMhcGcX4d9eRqrXkaidlDsqUbvJ5RxdRTFrH0+ch7j6QfSf5YrmTTRI9PvuIlg7txsGODsqadq273kKOh3Mr+GpkrNYndDC1uS7mFhyaXTDWm0vA1EtoCRg5QhWc+PQ7TEf6MNxavd3W7gNZuDD3hFPlCg9eq8aDbQ+zzUmDsvX6hsvHZpQNHj48Bvr0PdLga7faK1fm7CM+/+sEBr//BamF5wC/cItZxPU1O+qlGX4ygKUPjmG4vZk2vzJrY/oxZ+YeY+jhLD6X2ODJojWf1uWNQ9qbQScPAaeP4lpdBF9qn7+M9VoFGxVJ8Z6deoAz+VUckBpJ6fWih2zvLmTbWjDi53Ghp4eWNsP4D3Ysju+tYgv2AAAAAElFTkSuQmCC'
+const PIP_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAFKElEQVR4AX1VW3MURRT+Ts/sNaGyuW0uELKRi8UlCaCAXCyilJalZcGLz+ovgH+Q5A9Y/AN49U18UalCiZQGTWkwQAwIZK0kEAhhk8sudmd2Z46nu3eTcIldOzvT3ae/851rE/5nMHOqtIpzz56WB2YeFDORmMrodTdCS4mkc3NbV/SyE1ffJBKU3QyDXrdYLHKmsBJcnBgrDEzfDVDMM2LRmEgTW8UhyuUKxeuYd/e61NYZu9TaGR1ubHxV0SsK/BKfG/15ZWhyvNLgUIyUUlyT038hsz1IJHPiSlChaDzg3f1qeX9/crih0bmwqQKvyIM/XlkZmp5ScF1XPMQaRygbxOqHOSYfrFVodfLHCMMQ3bsCnBjYMtTQSMM1TLf2URLmV3/ID2XvuSBXISRQlavFNu7RXywu0sTMutVKSn4K2fuyovJDucVgubHZWkI1n//1R3F8bBQpJ+JyQwNTqkkOPAxBVdoWFBavGova0JqtACEIQ97XFywfPFx3UMdEaYG5ufLgrVucgusglHlnj4vuNx0cP+2iY7uiUCMq4lBrUwIigBsfcRaHsq4fEozJSaRKxeCixlaa/fw8f1H0owYgEN9y1dtulLBzn4OjpxyktypKbhEQUiJHsArt24laJXK2qjyCO5PlgVyOU8r3w7O3J+0Gq+rhl3IrniDs6VXY2+8YApqItsoSAh057iCxBdpSY4V+37uv4x+eV3OPwjOFkrNmut6c/LuEfCGwEdrwOBEDiNY2QqJeu0txc1ohWU+yZ4HZWKV41XNpMReecku+OsBKSkfHTpmMI68S46s/edTSHGLnjijSbdFaMGHj4OPEuwlwaANfDsjEzriNq3Qkq2YfVTJuEFIqNDlgskMnocmuSDyOZang0TEfyWQeb3Q7aGmJGpYz8xEu3ijQ/r0J1Nc7Rnl3xsHqXaZiaT23EslIxpRpAM1AXCQ69Nv4Uq/L2xVFXpDk2/84uDJSFJYOQzm0sJTA9Rs+SwkYSuk04chhha4u42qDqQvFLXqU9SqcMTXDvF6rkhUtjUzPcmBbA6742YVXtikg/mSvHNH4mJ7xMHXPQ7rVQVMqIjIOdIuRsC67ne3I+hXqllq3OqoF3NVOOHmYsFIA3RgnXnyu922LgCUjARNXi4f+nGCxsp5zBaZAmpXjSGVXmOJxdVM1NWAkHgslsNKLygS/DPKF5cx8xWhKJoD3j4Pe6lNoaZIEKJMwF0CR9wOFr79dxUopCmmuJESFp2PO19Up3taBy6SL4epvnBsZW2tqbNjJ7O19HvXuib9QE54H3P8X+H0iNK3BJodaO2ObIPDxKYUDfehR0i+WjvbTNXI0M2h2wkTYVUBjtxzcmfKs4uoTk4zd1h7A80XeyJGJi7ZKn9Hz+jrC9q241CG9yARMrMhcGcX4d9eRqrXkaidlDsqUbvJ5RxdRTFrH0+ch7j6QfSf5YrmTTRI9PvuIlg7txsGODsqadq273kKOh3Mr+GpkrNYndDC1uS7mFhyaXTDWm0vA1EtoCRg5QhWc+PQ7TEf6MNxavd3W7gNZuDD3hFPlCg9eq8aDbQ+zzUmDsvX6hsvHZpQNHj48Bvr0PdLga7faK1fm7CM+/+sEBr//BamF5wC/cItZxPU1O+qlGX4ygKUPjmG4vZk2vzJrY/oxZ+YeY+jhLD6X2ODJojWf1uWNQ9qbQScPAaeP4lpdBF9qn7+M9VoFGxVJ8Z6deoAz+VUckBpJ6fWih2zvLmTbWjDi53Ghp4eWNsP4D3Ysju+tYgv2AAAAAElFTkSuQmCC'
+
+const DASHBOARD_PASSWORD = process.env.NEXT_PUBLIC_DASHBOARD_PASSWORD || 'interstellar2212'
 
 const SIGNAL_BADGE: Record<string, string> = {
   supported: 'b-teal', partial: 'b-amber', friction: 'b-red',
@@ -27,7 +29,89 @@ const PRIORITY_CLASS: Record<string, string> = {
   medium: 'priority-medium', low: 'priority-low', resolved: 'priority-resolved'
 }
 
+function LoginScreen({ onLogin }: { onLogin: () => void }) {
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState(false)
+  const [shake, setShake] = useState(false)
+
+  function attempt() {
+    if (password === DASHBOARD_PASSWORD) {
+      sessionStorage.setItem('pip_auth', '1')
+      onLogin()
+    } else {
+      setError(true)
+      setShake(true)
+      setTimeout(() => setShake(false), 500)
+      setPassword('')
+    }
+  }
+
+  function handleKey(e: React.KeyboardEvent) {
+    if (e.key === 'Enter') attempt()
+  }
+
+  return (
+    <div style={{
+      minHeight: '100vh', background: 'var(--rf-bg)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center'
+    }}>
+      <div style={{
+        background: 'var(--rf-bg-card)', border: '1px solid var(--border)',
+        borderRadius: 20, padding: '2.5rem 2rem', width: 340,
+        boxShadow: '0 8px 40px rgba(75,86,217,0.12)',
+        animation: shake ? 'shake 0.4s ease' : 'none'
+      }}>
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <img src={PIP_LOGO} alt="Pip" style={{ width: 52, height: 52, borderRadius: 14, marginBottom: 14 }} />
+          <div style={{ fontSize: 20, fontWeight: 700, color: 'var(--rf-indigo-deeper)', letterSpacing: '-0.02em' }}>Pip Dashboard</div>
+          <div style={{ fontSize: 12, color: 'var(--text-tertiary)', marginTop: 4 }}>Beta Intelligence · Rosterfy</div>
+        </div>
+        <div style={{ marginBottom: 12 }}>
+          <input
+            type="password"
+            placeholder="Enter password"
+            value={password}
+            onChange={e => { setPassword(e.target.value); setError(false) }}
+            onKeyDown={handleKey}
+            autoFocus
+            style={{
+              width: '100%', border: `1px solid ${error ? '#E24B4A' : 'var(--border)'}`,
+              borderRadius: 10, padding: '10px 14px', fontSize: 14,
+              fontFamily: 'inherit', outline: 'none', background: 'var(--rf-bg)',
+              color: 'var(--text)', transition: 'border 0.15s'
+            }}
+          />
+          {error && <div style={{ fontSize: 11, color: '#A32D2D', marginTop: 6 }}>Incorrect password — try again</div>}
+        </div>
+        <button
+          onClick={attempt}
+          style={{
+            width: '100%', background: 'var(--rf-indigo)', color: '#fff',
+            border: 'none', borderRadius: 10, padding: '11px 0', fontSize: 14,
+            fontWeight: 600, cursor: 'pointer', transition: 'background 0.15s'
+          }}
+          onMouseOver={e => (e.currentTarget.style.background = 'var(--rf-indigo-dark)')}
+          onMouseOut={e => (e.currentTarget.style.background = 'var(--rf-indigo)')}
+        >
+          Access dashboard
+        </button>
+      </div>
+      <style>{`
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          20% { transform: translateX(-8px); }
+          40% { transform: translateX(8px); }
+          60% { transform: translateX(-6px); }
+          80% { transform: translateX(6px); }
+        }
+      `}</style>
+    </div>
+  )
+}
+
 export default function Dashboard() {
+  const [authed, setAuthed] = useState(false)
+  const [checking, setChecking] = useState(true)
   const [data, setData] = useState<DashboardData>(initialData)
   const [tab, setTab] = useState<Tab>('overview')
   const [chatOpen, setChatOpen] = useState(true)
@@ -38,12 +122,17 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
+  useEffect(() => {
+    if (sessionStorage.getItem('pip_auth') === '1') setAuthed(true)
+    setChecking(false)
+  }, [])
+
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [messages])
 
   const navItems: { id: Tab; label: string; dot?: string; badge?: number }[] = [
     { id: 'overview', label: 'Overview' },
     { id: 'usecases', label: 'Use cases', dot: 'nav-dot-gray' },
-    { id: 'issues', label: 'Issues & failures', dot: 'nav-dot-coral', badge: data.issues.filter(i => i.priority !== 'resolved' && i.priority !== 'low').length },
+    { id: 'issues', label: 'Issues & failures', dot: 'nav-dot-red', badge: data.issues.filter(i => i.priority !== 'resolved' && i.priority !== 'low').length },
     { id: 'gaps', label: 'Capability gaps', dot: 'nav-dot-amber', badge: data.capabilityGaps.filter(g => g.priority === 'high').length },
     { id: 'feedback', label: 'Customer feedback', dot: 'nav-dot-teal' },
     { id: 'roadmap', label: 'Roadmap gaps', dot: 'nav-dot-amber' },
@@ -79,6 +168,9 @@ export default function Dashboard() {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage() }
   }
 
+  if (checking) return null
+  if (!authed) return <LoginScreen onLogin={() => setAuthed(true)} />
+
   return (
     <>
       <Head>
@@ -89,7 +181,7 @@ export default function Dashboard() {
         <aside className="sidebar">
           <div className="sidebar-logo">
             <img src={PIP_LOGO} alt="Pip" />
-            <div className="sidebar-logo-text">
+            <div>
               <div className="sidebar-logo-title">Pip</div>
               <div className="sidebar-logo-sub">Beta Intelligence</div>
             </div>
@@ -105,7 +197,13 @@ export default function Dashboard() {
           </nav>
           <div className="sidebar-footer">
             Last updated · {data.meta.lastUpdated}<br />
-            {data.meta.betaAccounts} accounts · Pendo 90d window
+            {data.meta.betaAccounts} accounts · Pendo 90d window<br /><br />
+            <span
+              style={{ color: 'var(--text-tertiary)', cursor: 'pointer', fontSize: 10 }}
+              onClick={() => { sessionStorage.removeItem('pip_auth'); setAuthed(false) }}
+            >
+              Sign out
+            </span>
           </div>
         </aside>
 
@@ -320,7 +418,7 @@ function Roadmap({ data }: { data: DashboardData }) {
       <div className="section">
         <div className="gap-grid">
           <div className="gap-card">
-            <div className="gap-card-title" style={{ color: 'var(--rf-coral-dark)' }}>Immediate — fix or mitigate now</div>
+            <div className="gap-card-title" style={{ color: 'var(--red)' }}>Immediate — fix or mitigate now</div>
             {data.roadmapGaps.immediate.map((item, i) => (
               <div key={i} className="gap-item"><span className="gap-dot gap-dot-red" />{item}</div>
             ))}
