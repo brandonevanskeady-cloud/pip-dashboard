@@ -1,10 +1,10 @@
 {
   "meta": {
     "lastUpdated": "25 Jun 2026",
-    "version": 2,
+    "version": 3,
     "betaAccounts": 9,
     "emergentUseCases": 7,
-    "failureModes": 3,
+    "failureModes": 2,
     "capabilityGaps": 6
   },
   "reliableCore": [
@@ -27,18 +27,18 @@
   "issues": [
     {
       "title": "Shift creation hanging / silent execution failure",
-      "description": "Pip says 'creating now' repeatedly without executing tool calls",
+      "description": "Pip said 'creating now' repeatedly without executing tool calls during bulk shift creation",
       "accounts": ["Guide Dogs NSW/ACT"],
-      "rootCause": "Execution reliability bug — not a scope gap",
-      "evidence": "3 rage prompts · 84s processing delay · User stated 'I think this is bugged'",
-      "status": "jira",
-      "statusLabel": "Jira raised · BTD · Sprint 115",
-      "action": "Interstellar team investigating",
-      "priority": "critical"
+      "rootCause": "Execution reliability bug — investigated and resolved by Interstellar team",
+      "evidence": "3 rage prompts · 84s processing delay · Jira BTD · Sprint 115 · Resolved 25 Jun 2026",
+      "status": "resolved",
+      "statusLabel": "✓ Resolved",
+      "action": "Customer notification pending — Guide Dogs NSW/ACT",
+      "priority": "resolved"
     },
     {
       "title": "Volunteer assignment fails at end of workflow",
-      "description": "Pip completes shift creation and volunteer search, then fails at assignment step",
+      "description": "Pip completes shift creation and volunteer search, then fails at the assignment step",
       "accounts": ["Families Forward", "The Light House"],
       "rootCause": "Assignment API not exposed to Pip — trust-breaking UX pattern",
       "evidence": "Pip finds volunteers, cannot assign · Happened twice per session",
@@ -111,7 +111,6 @@
   ],
   "roadmapGaps": {
     "immediate": [
-      "Shift creation execution reliability bug",
       "Volunteer assignment API exposure (or clear scope communication)",
       "Linked shift confirmation API param"
     ],

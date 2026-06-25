@@ -11,23 +11,20 @@ interface ChatMessage {
   thinking?: boolean
 }
 
+const PIP_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAFKElEQVR4AX1VW3MURRT+Ts/sNaGyuW0uELKRi8UlCaCAXCyilJalZcGLz+ovgH+Q5A9Y/AN49U18UalCiZQGTWkwQAwIZK0kEAhhk8pudmd2Z46nu3eTcIldOzvT3ae/851rE/5nMHOqtIpzz56WB2YeFDORmMrodTdCS4mkc3NbV/SyE1ffJBKU3QyDXrdYLHKmsBJcnBgrDEzfDVDMM2LRmEgTW8UhyuUKxeuYd/e61NYZu9TaGR1ubHxV0SsK/BKfG/15ZWhyvNLgUIyUUlyT038hsz1IJHPiSlChaDzg3f1qeX9/crih0bmwqQKvyIM/XlkZmp5ScF1XPMQaRygbxOqHOSYfrFVodfLHCMMQ3bsCnBjYMtTQSMM1TLf2URLmV3/ID2XvuSBXISRQlavFNu7RXywu0sTMutVKSn4K2fuyovJDucVgubHZWkI1n//1R3F8bBQpJ+JyQwNTqkkOPAxBVdoWFBavGova0JqtACEIQ97XFywfPFx3UMdEaYG5ufLgrVucgusglHlnj4vuNx0cP+2iY7uiUCMq4lBrUwIigBsfcRaHsq4fEozJSaRKxeCixlaa/fw8f1H0owYgEN9y1dtulLBzn4OjpxyktypKbhEQUiJHsArt24laJXK2qjyCO5PlgVyOU8r3w7O3J+0Gq+rhl3IrniDs6VXY2+8YApqItsoSAh057iCxBdpSY4V+37uv4x+eV3OPwjOFkrNmut6c/LuEfCGwEdrwOBEDiNY2QqJeu0txc1ohWU+yZ4HZWKV41XNpMReecku+OsBKSkfHTpmMI68S46s/edTSHGLnjijSbdFaMGHj4OPEuwlwaANfDsjEzriNq3Qkq2YfVTJuEFIqNDlgskMnocmuSDyOZang0TEfyWQeb3Q7aGmJGpYz8xEu3ijQ/r0J1Nc7Rnl3xsHqXaZiaT23EslIxpRpAM1AXCQ69Nv4Uq/L2xVFXpDk2/84uDJSFJYOQzm0sJTA9Rs+SwkYSuk04chhha4u42qDqQvFLXqU9SqcMTXDvF6rkhUtjUzPcmBbA6742YVXtikg/mSvHNH4mJ7xMHXPQ7rVQVMqIjIOdIuRsC67ne3I+hXqllq3OqoF3NVOOHmYsFIA3RgnXnyu922LgCUjARNXi4f+nGCxsp5zBaZAmpXjSGVXmOJxdVM1NWAkHgslsNKLygS/DPKF5cx8xWhKJoD3j4Pe6lNoaZIEKJMwF0CR9wOFr79dxUopCmmuJESFp2PO19Up3taBy6SL4epvnBsZW2tqbNjJ7O19HvXuib9QE54H3P8X+H0iNK3BJodaO2ObIPDxKYUDfehR0i+WjvbTNXI0M2h2wkTYVUBjtxzcmfKs4uoTk4zd1h7A80XeyJGJi7ZKn9Hz+jrC9q241CG9yARMrMhcGcX4d9eRqrXkaidlDsqUbvJ5RxdRTFrH0+ch7j6QfSf5YrmTTRI9PvuIlg7txsGODsqadq273kKOh3Mr+GpkrNYndDC1uS7mFhyaXTDWm0vA1EtoCRg5QhWc+PQ7TEf6MNxavd3W7gNZuDD3hFPlCg9eq8aDbQ+zzUmDsvX6hsvHZpQNHj48Bvr0PdLga7faK1fm7CM+/+sEBr//BamF5wC/cItZxPU1O+qlGX4ygKUPjmG4vZk2vzJrY/oxZ+YeY+jhLD6X2ODJojWf1uWNQ9qbQScPAaeP4lpdBF9qn7+M9VoFGxVJ8Z6deoAz+VUckBpJ6fWih2zvLmTbWjDi53Ghp4eWNsP4D3Ysju+tYgv2AAAAAElFTkSuQmCC'
+
 const SIGNAL_BADGE: Record<string, string> = {
   supported: 'b-teal', partial: 'b-amber', friction: 'b-red',
   'high-friction': 'b-red', gap: 'b-amber', low: 'b-gray'
 }
-
 const STATUS_BADGE: Record<string, string> = {
   jira: 'b-red', decision: 'b-amber', 'api-gap': 'b-amber',
-  scope: 'b-gray', backlog: 'b-gray'
+  scope: 'b-gray', backlog: 'b-gray', resolved: 'b-green'
 }
-
-const TYPE_BADGE: Record<string, string> = {
-  api: 'b-red', capability: 'b-amber'
-}
-
+const TYPE_BADGE: Record<string, string> = { api: 'b-coral', capability: 'b-purple' }
 const PRIORITY_CLASS: Record<string, string> = {
   critical: 'priority-critical', high: 'priority-high',
-  medium: 'priority-medium', low: 'priority-low'
+  medium: 'priority-medium', low: 'priority-low', resolved: 'priority-resolved'
 }
 
 export default function Dashboard() {
@@ -35,23 +32,21 @@ export default function Dashboard() {
   const [tab, setTab] = useState<Tab>('overview')
   const [chatOpen, setChatOpen] = useState(true)
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'ai', content: 'Hi Brandon — drop in new feedback, Pendo data, or status updates and I\'ll update the dashboard automatically.' }
+    { role: 'ai', content: "Hi Brandon — drop in new feedback, Pendo data, or status updates and I'll update the dashboard automatically." }
   ])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
+  useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [messages])
 
-  const navItems: { id: Tab; label: string; dot?: string }[] = [
+  const navItems: { id: Tab; label: string; dot?: string; badge?: number }[] = [
     { id: 'overview', label: 'Overview' },
-    { id: 'usecases', label: 'Use cases', dot: 'dot-gray' },
-    { id: 'issues', label: 'Issues & failures', dot: 'dot-red' },
-    { id: 'gaps', label: 'Capability gaps', dot: 'dot-amber' },
-    { id: 'feedback', label: 'Customer feedback', dot: 'dot-teal' },
-    { id: 'roadmap', label: 'Roadmap gaps', dot: 'dot-amber' },
+    { id: 'usecases', label: 'Use cases', dot: 'nav-dot-gray' },
+    { id: 'issues', label: 'Issues & failures', dot: 'nav-dot-coral', badge: data.issues.filter(i => i.priority !== 'resolved' && i.priority !== 'low').length },
+    { id: 'gaps', label: 'Capability gaps', dot: 'nav-dot-amber', badge: data.capabilityGaps.filter(g => g.priority === 'high').length },
+    { id: 'feedback', label: 'Customer feedback', dot: 'nav-dot-teal' },
+    { id: 'roadmap', label: 'Roadmap gaps', dot: 'nav-dot-amber' },
   ]
 
   async function sendMessage() {
@@ -60,7 +55,6 @@ export default function Dashboard() {
     setInput('')
     setMessages(prev => [...prev, { role: 'user', content: userMsg }, { role: 'ai', content: 'Thinking...', thinking: true }])
     setLoading(true)
-
     try {
       const res = await fetch('/api/update', {
         method: 'POST',
@@ -68,7 +62,6 @@ export default function Dashboard() {
         body: JSON.stringify({ message: userMsg, dashboardData: data })
       })
       const result = await res.json()
-
       if (result.type === 'update' && result.data) {
         setData(result.data)
         setMessages(prev => [...prev.slice(0, -1), { role: 'ai', content: `✓ Dashboard updated — ${result.summary || 'changes saved'}` }])
@@ -92,31 +85,32 @@ export default function Dashboard() {
         <title>Pip — Beta Intelligence Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-
       <div className="app">
-        {/* Sidebar */}
         <aside className="sidebar">
           <div className="sidebar-logo">
-            <div className="sidebar-logo-title">Pip</div>
-            <div className="sidebar-logo-sub">Beta Intelligence · {data.meta.betaAccounts} accounts</div>
+            <img src={PIP_LOGO} alt="Pip" />
+            <div className="sidebar-logo-text">
+              <div className="sidebar-logo-title">Pip</div>
+              <div className="sidebar-logo-sub">Beta Intelligence</div>
+            </div>
           </div>
           <nav className="sidebar-nav">
             {navItems.map(item => (
               <button key={item.id} className={`nav-item ${tab === item.id ? 'active' : ''}`} onClick={() => setTab(item.id)}>
                 {item.dot && <span className={`nav-dot ${item.dot}`} />}
                 {item.label}
+                {item.badge ? <span className="sidebar-badge">{item.badge}</span> : null}
               </button>
             ))}
           </nav>
           <div className="sidebar-footer">
-            Last updated<br />{data.meta.lastUpdated}<br /><br />
-            Pendo · 90-day window<br />~1 month live beta
+            Last updated · {data.meta.lastUpdated}<br />
+            {data.meta.betaAccounts} accounts · Pendo 90d window
           </div>
         </aside>
 
-        {/* Main */}
         <main className="main">
-          {tab === 'overview' && <Overview data={data} />}
+          {tab === 'overview' && <Overview data={data} onNav={setTab} />}
           {tab === 'usecases' && <UseCases data={data} />}
           {tab === 'issues' && <Issues data={data} />}
           {tab === 'gaps' && <Gaps data={data} />}
@@ -124,12 +118,14 @@ export default function Dashboard() {
           {tab === 'roadmap' && <Roadmap data={data} />}
         </main>
 
-        {/* Chat panel */}
         <div className={`chat-panel ${chatOpen ? '' : 'chat-collapsed'}`}>
           <div className="chat-header">
-            <div>
-              <div className="chat-header-title">Update dashboard</div>
-              <div className="chat-header-sub">Drop in feedback or Pendo data</div>
+            <div className="chat-header-inner">
+              <img src={PIP_LOGO} alt="Pip" className="chat-header-logo" />
+              <div>
+                <div className="chat-header-title">Update dashboard</div>
+                <div className="chat-header-sub">Paste feedback or Pendo data</div>
+              </div>
             </div>
             <button className="chat-toggle" onClick={() => setChatOpen(o => !o)}>{chatOpen ? '−' : '+'}</button>
           </div>
@@ -151,33 +147,35 @@ export default function Dashboard() {
   )
 }
 
-function Overview({ data }: { data: DashboardData }) {
+function Overview({ data, onNav }: { data: DashboardData; onNav: (t: Tab) => void }) {
+  const openIssues = data.issues.filter(i => i.priority !== 'resolved' && i.priority !== 'low')
+  const resolvedIssues = data.issues.filter(i => i.priority === 'resolved')
   return (
     <>
       <div className="page-header">
-        <div className="page-title">Overview</div>
+        <div className="page-title">Beta Intelligence</div>
         <div className="page-sub">Closed beta · {data.meta.betaAccounts} accounts active · Last updated {data.meta.lastUpdated}</div>
       </div>
-
       <div className="metric-grid">
         <div className="metric-card"><div className="metric-label">Beta accounts</div><div className="metric-value">{data.meta.betaAccounts}</div><div className="metric-sub">Active in Pendo</div></div>
         <div className="metric-card"><div className="metric-label">Emergent use cases</div><div className="metric-value">{data.meta.emergentUseCases}</div><div className="metric-sub">Last 90 days</div></div>
-        <div className="metric-card"><div className="metric-label">Distinct failure modes</div><div className="metric-value">{data.meta.failureModes}</div><div className="metric-sub">Reclassified from Pendo</div></div>
+        <div className="metric-card"><div className="metric-label">Open failure modes</div><div className="metric-value">{data.meta.failureModes}</div><div className="metric-sub">1 resolved this week</div></div>
         <div className="metric-card"><div className="metric-label">Capability gaps</div><div className="metric-value">{data.meta.capabilityGaps}</div><div className="metric-sub">Unsupported request types</div></div>
       </div>
-
       <div className="section">
         <div className="section-label">Pip's reliable core</div>
         <div className="works-grid">
           {data.reliableCore.map((item, i) => (
-            <div key={i} className="works-item"><div className="works-label">Confirmed across multiple accounts</div>{item}</div>
+            <div key={i} className="works-item"><div className="works-label">Confirmed ✓</div>{item}</div>
           ))}
         </div>
       </div>
-
       <div className="section">
-        <div className="section-label">Immediate attention</div>
-        {data.issues.filter(i => i.priority === 'critical' || i.priority === 'high').map((issue, i) => (
+        <div className="section-label">Issues requiring attention</div>
+        {resolvedIssues.map((issue, i) => (
+          <div key={i} className="resolved-banner">✓ {issue.title} — resolved · {issue.action}</div>
+        ))}
+        {openIssues.map((issue, i) => (
           <div key={i} className={`card priority-card ${PRIORITY_CLASS[issue.priority]}`}>
             <div className="card-header">
               <div><div className="card-title">{issue.title}</div><div className="card-sub">{issue.description}</div></div>
@@ -190,14 +188,13 @@ function Overview({ data }: { data: DashboardData }) {
           </div>
         ))}
       </div>
-
       <div className="section">
         <div className="section-label">Customer feedback — open items</div>
         {data.customerFeedback.map((f, i) => (
           <div key={i} className="card priority-card priority-high">
             <div className="card-header">
               <div><div className="card-title">{f.org}</div><div className="card-sub">{f.contact} · {f.notes}</div></div>
-              <span className={`badge ${f.status === 'active' ? 'b-blue' : 'b-amber'}`}>{f.statusLabel}</span>
+              <span className={`badge ${f.status === 'active' ? 'b-purple' : 'b-amber'}`}>{f.statusLabel}</span>
             </div>
             <div style={{ marginTop: 8 }}>
               {f.openItems.map((o, j) => <span key={j} className="open-item">⚠ {o}</span>)}
@@ -212,7 +209,7 @@ function Overview({ data }: { data: DashboardData }) {
 function UseCases({ data }: { data: DashboardData }) {
   return (
     <>
-      <div className="page-header"><div className="page-title">Use cases</div><div className="page-sub">Emergent use cases from Pendo Agent Analytics · 90-day window · ~1 month live beta</div></div>
+      <div className="page-header"><div className="page-title">Use cases</div><div className="page-sub">Emergent use cases · Pendo Agent Analytics · 90-day window · ~1 month live beta</div></div>
       <div className="section">
         <div className="table-wrap">
           <table>
@@ -231,7 +228,7 @@ function UseCases({ data }: { data: DashboardData }) {
             </tbody>
           </table>
         </div>
-        <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginTop: 8 }}>Sample size is small — max 6 visitors per use case. Weight alongside qualitative feedback before prioritising.</div>
+        <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginTop: 8 }}>Small sample size — max 6 visitors per use case. Weight alongside qualitative feedback before prioritising.</div>
       </div>
     </>
   )
@@ -240,13 +237,13 @@ function UseCases({ data }: { data: DashboardData }) {
 function Issues({ data }: { data: DashboardData }) {
   return (
     <>
-      <div className="page-header"><div className="page-title">Issues & failures</div><div className="page-sub">Reclassified from Pendo "Persistent Task Execution Failure" · 3 distinct root causes identified</div></div>
+      <div className="page-header"><div className="page-title">Issues & failures</div><div className="page-sub">Reclassified from Pendo "Persistent Task Execution Failure" · 3 distinct root causes · 1 resolved</div></div>
       <div className="section">
         {data.issues.map((issue, i) => (
           <div key={i} className={`card priority-card ${PRIORITY_CLASS[issue.priority]}`}>
             <div className="card-header">
               <div style={{ flex: 1 }}>
-                <div className="card-title">{issue.title}</div>
+                <div className="card-title" style={issue.priority === 'resolved' ? { textDecoration: 'line-through', color: 'var(--text-tertiary)' } : {}}>{issue.title}</div>
                 <div className="card-sub">{issue.description}</div>
               </div>
               <span className={`badge ${STATUS_BADGE[issue.status]}`}>{issue.statusLabel}</span>
@@ -298,16 +295,13 @@ function Feedback({ data }: { data: DashboardData }) {
         {data.customerFeedback.map((f, i) => (
           <div key={i} className="card">
             <div className="card-header">
-              <div>
-                <div className="card-title">{f.org}</div>
-                <div className="card-sub">{f.contact}</div>
-              </div>
-              <span className={`badge ${f.status === 'active' ? 'b-blue' : 'b-amber'}`}>{f.statusLabel}</span>
+              <div><div className="card-title">{f.org}</div><div className="card-sub">{f.contact}</div></div>
+              <span className={`badge ${f.status === 'active' ? 'b-purple' : 'b-amber'}`}>{f.statusLabel}</span>
             </div>
             <div className="theme-list">{f.themes.map((t, j) => <span key={j} className="badge b-gray">{t}</span>)}</div>
             {f.openItems.length > 0 && (
               <div style={{ marginTop: 10 }}>
-                <div style={{ fontSize: 10, color: 'var(--text-tertiary)', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Open items</div>
+                <div style={{ fontSize: 10, color: 'var(--text-tertiary)', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 700 }}>Open items</div>
                 {f.openItems.map((o, j) => <span key={j} className="open-item">⚠ {o}</span>)}
               </div>
             )}
@@ -326,7 +320,7 @@ function Roadmap({ data }: { data: DashboardData }) {
       <div className="section">
         <div className="gap-grid">
           <div className="gap-card">
-            <div className="gap-card-title" style={{ color: 'var(--red)' }}>Immediate — fix or mitigate now</div>
+            <div className="gap-card-title" style={{ color: 'var(--rf-coral-dark)' }}>Immediate — fix or mitigate now</div>
             {data.roadmapGaps.immediate.map((item, i) => (
               <div key={i} className="gap-item"><span className="gap-dot gap-dot-red" />{item}</div>
             ))}
