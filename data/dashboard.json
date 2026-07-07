@@ -1,10 +1,10 @@
 {
   "meta": {
-    "lastUpdated": "25 Jun 2026",
-    "version": 3,
+    "lastUpdated": "7 Jul 2026",
+    "version": 4,
     "betaAccounts": 9,
     "emergentUseCases": 7,
-    "failureModes": 2,
+    "failureModes": 3,
     "capabilityGaps": 6
   },
   "reliableCore": [
@@ -169,6 +169,19 @@
       "statusLabel": "Future roadmap",
       "action": "Validate demand, add to backlog",
       "priority": "low"
+    },
+    {
+      "title": "Incorrect day-of-week/calendar calculation during bulk shift scheduling",
+      "description": "Pip miscalculated which calendar dates fall on Sat/Sun for Aug\u2013Sep 2026, then incorrectly disputed the customer's correct date when they corrected it",
+      "accounts": [
+        "Guide Dogs NSW/ACT"
+      ],
+      "rootCause": "Date/weekday calculation bug \u2014 distinct root cause from the AM/PM conversion issue on the same account",
+      "evidence": "2 incorrect date sets generated \u00b7 Pip asserted an incorrect 'correction' contradicting the customer's accurate date \u00b7 No shifts created \u2014 caught pre-confirmation both times \u00b7 Jira BTD \u00b7 Priority 3",
+      "status": "open",
+      "statusLabel": "Open \u2014 Jira raised",
+      "action": "Engineering investigation \u2014 date/weekday calculation logic",
+      "priority": "medium"
     }
   ],
   "capabilityGaps": [
