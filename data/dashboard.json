@@ -1,11 +1,11 @@
 {
   "meta": {
-    "lastUpdated": "7 Jul 2026",
-    "version": 4,
+    "lastUpdated": "10 Jul 2026",
+    "version": 5,
     "betaAccounts": 9,
     "emergentUseCases": 7,
     "failureModes": 3,
-    "capabilityGaps": 6
+    "capabilityGaps": 7
   },
   "reliableCore": [
     "Event & shift creation and configuration",
@@ -196,7 +196,11 @@
       ],
       "unsupportedRate": 100,
       "action": "Expose bulk assign API or scope out clearly upfront",
-      "priority": "high"
+      "priority": "high",
+      "roadmapStatus": "not-started",
+      "roadmapStatusLabel": "Not started",
+      "targetDate": "30 Oct 2026",
+      "roadmapItem": "Pip Volunteer Assignments \u2014 Monday.com"
     },
     {
       "name": "Linked shift handling",
@@ -208,7 +212,11 @@
       ],
       "unsupportedRate": 100,
       "action": "Expose linked shift confirmation param",
-      "priority": "high"
+      "priority": "high",
+      "roadmapStatus": "not-started",
+      "roadmapStatusLabel": "Not started",
+      "targetDate": "30 Nov 2026",
+      "roadmapItem": "Pip Linked Shifts \u2014 Monday.com"
     },
     {
       "name": "Volunteer check-in",
@@ -220,7 +228,11 @@
       ],
       "unsupportedRate": 100,
       "action": "Expose check-in tool to Pip",
-      "priority": "high"
+      "priority": "high",
+      "roadmapStatus": "unscheduled",
+      "roadmapStatusLabel": "Not yet scheduled",
+      "targetDate": null,
+      "roadmapItem": "No matching item on the Pip! \u2014 AI Agents in Rosterfy Monday board \u2014 needs to be logged"
     },
     {
       "name": "Recurring / series shift creation",
@@ -233,7 +245,11 @@
       ],
       "unsupportedRate": 100,
       "action": "New capability \u2014 future sprint",
-      "priority": "medium"
+      "priority": "medium",
+      "roadmapStatus": "not-started",
+      "roadmapStatusLabel": "Not started",
+      "targetDate": "31 Dec 2026",
+      "roadmapItem": "Pip Recurring Shift Patterns \u2014 Monday.com"
     },
     {
       "name": "Shift group visibility configuration",
@@ -245,7 +261,11 @@
       ],
       "unsupportedRate": 50,
       "action": "New capability \u2014 future sprint",
-      "priority": "medium"
+      "priority": "medium",
+      "roadmapStatus": "not-started",
+      "roadmapStatusLabel": "Not started",
+      "targetDate": "29 Jan 2027",
+      "roadmapItem": "Pip Shift Group Visibility \u2014 Monday.com"
     },
     {
       "name": "Event templates & email notifications",
@@ -258,7 +278,27 @@
       ],
       "unsupportedRate": 100,
       "action": "Backlog \u2014 validate demand further",
-      "priority": "low"
+      "priority": "low",
+      "roadmapStatus": "not-started",
+      "roadmapStatusLabel": "Not started",
+      "targetDate": "26 Feb 2027",
+      "roadmapItem": "Pip Event Templates & Email Notifications \u2014 Monday.com"
+    },
+    {
+      "name": "Applications close date/time \u2014 bulk API access",
+      "description": "Close date/time can only be updated one shift at a time; no bulk or scheduled update via API",
+      "type": "api",
+      "typeLabel": "API gap",
+      "accounts": [
+        "Achilles International"
+      ],
+      "unsupportedRate": 100,
+      "action": "Confirmed small effort by engineering \u2014 expose close date/time field via API. Recurring need: Achilles closes applications ~24h before each shift (Tue shifts close Mon night, Fri shifts close Sat morning)",
+      "priority": "medium",
+      "roadmapStatus": "unscheduled",
+      "roadmapStatusLabel": "Not yet scheduled",
+      "targetDate": null,
+      "roadmapItem": "Not yet logged on Monday \u2014 recommend adding as a sub-item under Pip! \u2014 AI Agents in Rosterfy"
     }
   ],
   "customerFeedback": [
@@ -299,13 +339,10 @@
   ],
   "roadmapGaps": {
     "immediate": [
-      "Volunteer assignment API exposure (or clear scope communication)",
-      "Linked shift confirmation API param"
+      "Volunteer check-in tool exposure \u2014 no Monday roadmap date yet",
+      "Applications close date/time bulk API access \u2014 no Monday roadmap date yet (Achilles International)"
     ],
     "nearTerm": [
-      "Volunteer check-in tool exposure",
-      "Recurring / series shift creation",
-      "Shift group visibility configuration",
       "AI audit logging & action attribution",
       "Trust Centre \u2014 Anthropic subprocessor detail",
       "Responsible AI governance framework",

@@ -24,6 +24,9 @@ const STATUS_BADGE: Record<string, string> = {
   scope: 'b-gray', backlog: 'b-gray', resolved: 'b-green'
 }
 const TYPE_BADGE: Record<string, string> = { api: 'b-coral', capability: 'b-purple' }
+const ROADMAP_STATUS_BADGE: Record<string, string> = {
+  'working-on-it': 'b-teal', 'not-started': 'b-gray', unscheduled: 'b-amber', done: 'b-green'
+}
 const PRIORITY_CLASS: Record<string, string> = {
   critical: 'priority-critical', high: 'priority-high',
   medium: 'priority-medium', low: 'priority-low', resolved: 'priority-resolved'
@@ -133,7 +136,7 @@ export default function Dashboard() {
     { id: 'overview', label: 'Overview' },
     { id: 'usecases', label: 'Use cases', dot: 'nav-dot-gray' },
     { id: 'issues', label: 'Issues & failures', dot: 'nav-dot-red', badge: data.issues.filter(i => i.priority !== 'resolved' && i.priority !== 'low').length },
-    { id: 'gaps', label: 'Capability gaps', dot: 'nav-dot-amber', badge: data.capabilityGaps.filter(g => g.priority === 'high').length },
+    { id: 'gaps', label: 'Capability roadmap', dot: 'nav-dot-amber', badge: data.capabilityGaps.filter(g => g.priority === 'high').length },
     { id: 'feedback', label: 'Customer feedback', dot: 'nav-dot-teal' },
     { id: 'roadmap', label: 'Roadmap gaps', dot: 'nav-dot-amber' },
   ]
@@ -362,11 +365,11 @@ function Issues({ data }: { data: DashboardData }) {
 function Gaps({ data }: { data: DashboardData }) {
   return (
     <>
-      <div className="page-header"><div className="page-title">Capability gaps</div><div className="page-sub">Unsupported request types identified from Pendo conversation analysis</div></div>
+      <div className="page-header"><div className="page-title">Capability roadmap</div><div className="page-sub">Beta-identified gaps we're picking up — target dates sourced from the Pip roadmap in Monday.com</div></div>
       <div className="section">
         <div className="table-wrap">
           <table>
-            <thead><tr><th style={{ width: '22%' }}>Gap</th><th>Type</th><th>Accounts affected</th><th>Unsupported rate</th><th>Action</th></tr></thead>
+            <thead><tr><th style={{ width: '20%' }}>Gap</th><th>Type</th><th>Accounts affected</th><th>Unsupported rate</th><th>Action</th><th style={{ width: '13%' }}>Target</th></tr></thead>
             <tbody>
               {data.capabilityGaps.map((gap, i) => (
                 <tr key={i}>
@@ -375,6 +378,11 @@ function Gaps({ data }: { data: DashboardData }) {
                   <td>{gap.accounts.map((a, j) => <span key={j} className="account-tag">{a}</span>)}</td>
                   <td>{gap.unsupportedRate}%</td>
                   <td style={{ fontSize: 11, color: 'var(--text-tertiary)' }}>{gap.action}</td>
+                  <td>
+                    <span className={`badge ${ROADMAP_STATUS_BADGE[gap.roadmapStatus] || 'b-gray'}`}>{gap.roadmapStatusLabel}</span>
+                    {gap.targetDate && <div style={{ fontSize: 11, color: 'var(--text-secondary)', marginTop: 4 }}>{gap.targetDate}</div>}
+                    <div style={{ fontSize: 10, color: 'var(--text-tertiary)', marginTop: 4 }}>{gap.roadmapItem}</div>
+                  </td>
                 </tr>
               ))}
             </tbody>
