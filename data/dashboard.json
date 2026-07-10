@@ -1,11 +1,11 @@
 {
   "meta": {
     "lastUpdated": "10 Jul 2026",
-    "version": 5,
+    "version": 6,
     "betaAccounts": 9,
     "emergentUseCases": 7,
     "failureModes": 3,
-    "capabilityGaps": 7
+    "capabilityGaps": 8
   },
   "reliableCore": [
     "Event & shift creation and configuration",
@@ -299,6 +299,22 @@
       "roadmapStatusLabel": "Not yet scheduled",
       "targetDate": null,
       "roadmapItem": "Not yet logged on Monday \u2014 recommend adding as a sub-item under Pip! \u2014 AI Agents in Rosterfy"
+    },
+    {
+      "name": "Lite admin permission toggle (on/off)",
+      "description": "Ability to enable or disable lite admin access per account \u2014 demand direction varies by customer",
+      "type": "capability",
+      "typeLabel": "Capability gap",
+      "accounts": [
+        "Orange Sky"
+      ],
+      "unsupportedRate": null,
+      "action": "Demand still being validated \u2014 some accounts want lite admins enabled, others want it turned off. Confirm scope before committing to a build",
+      "priority": "low",
+      "roadmapStatus": "unscheduled",
+      "roadmapStatusLabel": "Not yet scheduled",
+      "targetDate": null,
+      "roadmapItem": "Not yet logged on Monday \u2014 pending demand validation"
     }
   ],
   "customerFeedback": [
@@ -340,7 +356,8 @@
   "roadmapGaps": {
     "immediate": [
       "Volunteer check-in tool exposure \u2014 no Monday roadmap date yet",
-      "Applications close date/time bulk API access \u2014 no Monday roadmap date yet (Achilles International)"
+      "Applications close date/time bulk API access \u2014 no Monday roadmap date yet (Achilles International)",
+      "Lite admin permission toggle \u2014 demand still being validated (Orange Sky)"
     ],
     "nearTerm": [
       "AI audit logging & action attribution",

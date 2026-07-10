@@ -376,7 +376,7 @@ function Gaps({ data }: { data: DashboardData }) {
                   <td><div className="cell-name">{gap.name}</div><div className="cell-sub">{gap.description}</div></td>
                   <td><span className={`badge ${TYPE_BADGE[gap.type] || 'b-gray'}`}>{gap.typeLabel}</span></td>
                   <td>{gap.accounts.map((a, j) => <span key={j} className="account-tag">{a}</span>)}</td>
-                  <td>{gap.unsupportedRate}%</td>
+                  <td>{gap.unsupportedRate != null ? `${gap.unsupportedRate}%` : 'TBD'}</td>
                   <td style={{ fontSize: 11, color: 'var(--text-tertiary)' }}>{gap.action}</td>
                   <td>
                     <span className={`badge ${ROADMAP_STATUS_BADGE[gap.roadmapStatus] || 'b-gray'}`}>{gap.roadmapStatusLabel}</span>
